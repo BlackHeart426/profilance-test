@@ -67,11 +67,13 @@ export const NewsPage = (props: any) => {
 
     const handleApproveNews = async (idNews: number) => {
         try {
-            const response = await Axios.patch(`/newsData/${idNews}`, {approval: true})
             console.log(newsData.find((item: any) => {
                 return item.id === idNews && {...item, approval: true}
             }))
-            // setNewsData([...newsData, newsData.find((item: any) => {item.id === idNews})])
+            const data = newsData.map((item: any) => {
+                return (item.id === idNews ? ({...item , approval: true}) : item)
+            })
+            setNewsData(data)
         } catch (e) {
             console.log(e)
         }
@@ -80,7 +82,7 @@ export const NewsPage = (props: any) => {
     const handleRemoveNews = async (idNews: number) => {
         try {
             const response = await Axios.delete(`/newsData/${idNews}`)
-            // setNewsData([...newsData, newsData.find((item: any) => {item.id === idNews})])
+            setNewsData( newsData.filter((item: any) => item.id !== idNews))
         } catch (e) {
             console.log(e)
         }

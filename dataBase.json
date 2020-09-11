@@ -55,14 +55,6 @@
     },
     {
       "userId": 1,
-      "title": "1",
-      "description": "1",
-      "dateCreator": 1599853122337,
-      "approval": true,
-      "id": 6
-    },
-    {
-      "userId": 1,
       "title": "134534",
       "description": "1345",
       "dateCreator": 1599853172205,
@@ -74,7 +66,7 @@
       "title": "123",
       "description": "123",
       "dateCreator": 1599853382697,
-      "approval": true,
+      "approval": false,
       "id": 8
     }
   ]
