@@ -10,17 +10,17 @@ export interface INews {
     userId: number | null,
     title: string | null,
     description: string | null,
-    dateCreator: string | null,
+    dateCreator: number | null,
     approval: boolean
 }
 
 export const News = {
-    "id": null,
-    "userId": null,
-    "title": null,
-    "description": null,
-    "dateCreator": null,
-    "approval": false
+    id: null,
+    userId: null,
+    title: null,
+    description: null,
+    dateCreator: null,
+    approval: false
 }
 
 
@@ -47,20 +47,40 @@ export const NewsPage = (props: any) => {
         }
     }
 
-    const setData = async (newsData: INews) => {
+    const setData = async (news: INews) => {
         try {
             const data = {
-                userId: null,
-                title: newsData.title,
-                description: newsData.description,
+                userId: 1,
+                title: news.title,
+                description: news.description,
                 dateCreator: Date.now(),
                 approval: isAuth ? true : false
             }
-            console.log('newsData', newsData)
+             console.log('data', data)
 
-            // const response = await Axios.post('/newsData', newsData)
-            // console.log(response.data)
-            // setNewsData(response.data.map((item: INews ) => ({...item})))
+            const response = await Axios.post('/newsData', data)
+            setNewsData([...newsData, {...data, id: response.data.id}])
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleApproveNews = async (idNews: number) => {
+        try {
+            const response = await Axios.patch(`/newsData/${idNews}`, {approval: true})
+            console.log(newsData.find((item: any) => {
+                return item.id === idNews && {...item, approval: true}
+            }))
+            // setNewsData([...newsData, newsData.find((item: any) => {item.id === idNews})])
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleRemoveNews = async (idNews: number) => {
+        try {
+            const response = await Axios.delete(`/newsData/${idNews}`)
+            // setNewsData([...newsData, newsData.find((item: any) => {item.id === idNews})])
         } catch (e) {
             console.log(e)
         }
@@ -76,15 +96,11 @@ export const NewsPage = (props: any) => {
 
     const handleSaveInput = (event: any) => {
         setDataSaveNews({...dataSaveNews, [event.currentTarget.id]: event.currentTarget.value})
-        console.log(event.currentTarget.id)
-        console.log(event.currentTarget.value)
     }
 
     const handleSaveDataNews = () => {
         setShowAddNews(prevState => !prevState)
-        // setNewsData([...newsData, dataSaveNews])
         setData(dataSaveNews)
-        console.log(dataSaveNews)
     }
 
 
@@ -134,7 +150,7 @@ export const NewsPage = (props: any) => {
                    return item.title.toLowerCase().includes(filter.toLowerCase())
                        || item.description.toLowerCase().includes(filter.toLowerCase())
                }).map((news: any) =>
-                   <NewsCard key={news.id} news={news} isAuth={isAuth}/>
+                   <NewsCard key={news.id} news={news} isAuth={isAuth} onApproveNews={handleApproveNews} onRemoveNews={handleRemoveNews}/>
                )}
 
            </div>

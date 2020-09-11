@@ -6,7 +6,7 @@ import {RootState} from "../../../store/reducers/rootReducer";
 export const NewsCard = (props: any) => {
 
 
-    const {news, isAuth} = props
+    const {news, isAuth, onApproveNews, onRemoveNews} = props
     return (
         <div className="NewsCard-container">
             <div className="row">
@@ -21,8 +21,17 @@ export const NewsCard = (props: any) => {
                         </div>
                         {isAuth
                             && <div className="card-action">
-                                <a className="green-text" href="#">Одобрить</a>
-                                <a className="red-text" href="#">Удалить</a>
+                                {news.approval == false
+                                    && <a
+                                      className="green-text"
+                                      style={{cursor: "pointer"}}
+                                      onClick={() => onApproveNews(news.id)}
+                                    >Одобрить</a>}
+                                <a
+                                  className="red-text"
+                                  style={{cursor: "pointer"}}
+                                  onClick={() => onRemoveNews(news.id)}
+                                >Удалить</a>
                         </div>}
                     </div>
                 </div>
