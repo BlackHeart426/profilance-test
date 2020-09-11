@@ -1,7 +1,5 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../store/reducers/rootReducer";
-
+import moment from "moment";
 
 export const NewsCard = (props: any) => {
 
@@ -13,11 +11,14 @@ export const NewsCard = (props: any) => {
                 <div className="col s12 m12">
                     <div className="card white darken-1">
                         <div className="card-content black-text">
+
                             <div style={{textAlign: "right"}}>
                                 {news.approval ? <a className="blue-text" >Одобрено</a> : <a className="red-text">Не одобрено</a>}
                             </div>
                             <span className="card-title">{news.title}</span>
                             <p>{news.description}</p>
+                            <p style={{textAlign: "right", color: "#999999"}}>{moment(news.dateCreator).format('LL')}
+                            </p>
                         </div>
                         {isAuth
                             && <div className="card-action">
