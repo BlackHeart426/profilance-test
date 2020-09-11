@@ -67,9 +67,7 @@ export const NewsPage = (props: any) => {
 
     const handleApproveNews = async (idNews: number) => {
         try {
-            console.log(newsData.find((item: any) => {
-                return item.id === idNews && {...item, approval: true}
-            }))
+            const response = await Axios.patch(`/newsData/${idNews}`, {approval: true})
             const data = newsData.map((item: any) => {
                 return (item.id === idNews ? ({...item , approval: true}) : item)
             })
