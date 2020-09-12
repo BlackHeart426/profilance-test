@@ -4,7 +4,7 @@ import moment from "moment";
 export const NewsCard = (props: any) => {
 
 
-    const {news, isAuth, onApproveNews, onRemoveNews} = props
+    const {news, userData, onApproveNews, onRemoveNews} = props
     return (
         <div className="NewsCard-container">
             <div className="row">
@@ -12,15 +12,17 @@ export const NewsCard = (props: any) => {
                     <div className="card white darken-1">
                         <div className="card-content black-text">
 
-                            <div style={{textAlign: "right"}}>
-                                {news.approval ? <a className="blue-text" >Одобрено</a> : <a className="red-text">Не одобрено</a>}
-                            </div>
+                            {userData.isAdmin
+                                &&<div style={{textAlign: "right"}}>
+                                    {news.approval ? <a className="blue-text" >Одобрено</a> : <a className="red-text">Не одобрено</a>}
+                                </div>
+                            }
                             <span className="card-title">{news.title}</span>
                             <p>{news.description}</p>
                             <p style={{textAlign: "right", color: "#999999"}}>{moment(news.dateCreator).format('LL')}
                             </p>
                         </div>
-                        {isAuth
+                        {userData.isAdmin
                             && <div className="card-action">
                                 {news.approval == false
                                     && <a

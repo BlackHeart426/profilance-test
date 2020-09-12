@@ -25,7 +25,7 @@ export const News = {
 
 
 export const NewsPage = (props: any) => {
-    const isAuth = useSelector((state: RootState) => state.app.userData.isAuth)
+    const userData = useSelector((state: RootState) => state.app.userData)
     const [newsData, setNewsData] = useState<INews[]>([])
     const [filter, setFilter] = useState<string>('')
     const [showAddNews, setShowAddNews] = useState<boolean>(false)
@@ -57,7 +57,7 @@ export const NewsPage = (props: any) => {
                 title: news.title,
                 description: news.description,
                 dateCreator: Date.now(),
-                approval: isAuth ? true : false
+                approval: userData.isAdmin ? true : false
             }
 
             const response = await Axios.post('/newsData', data)
@@ -110,6 +110,9 @@ export const NewsPage = (props: any) => {
         setData(dataSaveNews)
     }
 
+    const filterGuest = (item: any) => {
+        return item
+    }
 
     useEffect(() => {
         getData()
@@ -145,10 +148,11 @@ export const NewsPage = (props: any) => {
                     </form>
                 </div>
             </div>
-            <div className="News-action">
-                <a className="waves-effect waves-light btn" onClick={handleShowAddUser}>Добавить клиента</a>
-
-            </div>
+            {userData.isAuth
+                && <div className="News-action">
+                    <a className="waves-effect waves-light btn" onClick={handleShowAddUser}>Добавить новость</a>
+                </div>
+            }
             <div className="App-add-user-content" style={showAddNews ? {display: "block"} : {display: "none"}}>
                 <div className="row">
                     <form className="col s12">
@@ -165,15 +169,30 @@ export const NewsPage = (props: any) => {
                     </form>
                 </div>
                 <div className="App-action">
-                    <a className="waves-effect waves-light btn" onClick={handleSaveDataNews}>Сохранить клиента</a>
+                    <a className="waves-effect waves-light btn" onClick={handleSaveDataNews}>Сохранить новость</a>
                 </div>
+
             </div>
             <div className="News-content">
                 {newsData.filter((item: any) => {
+                    if (!userData.isAuth) {
+                        return  item.approval != false && item
+                    } else {
+                        return item
+                    }
+                    }).filter((item: any) => {
+                    if (userData.isAuth && !userData.isAdmin) {
+                        return  item.userId === userData.id && item
+                    } else {
+                        return item
+                    }
+                    })
+                    .filter((item: any) => {
                     return item.title.toLowerCase().includes(filter.toLowerCase())
                         || item.description.toLowerCase().includes(filter.toLowerCase())
-                }).map((news: any) =>
-                    <NewsCard key={news.id} news={news} isAuth={isAuth} onApproveNews={handleApproveNews} onRemoveNews={handleRemoveNews}/>
+                    })
+                    .map((news: any) =>
+                    <NewsCard key={news.id} news={news} userData={userData} onApproveNews={handleApproveNews} onRemoveNews={handleRemoveNews}/>
                 )}
 
             </div>
