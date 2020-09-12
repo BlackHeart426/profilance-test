@@ -28,6 +28,7 @@ export const NewsPage = (props: any) => {
     const userData = useSelector((state: RootState) => state.app.userData)
     const [newsData, setNewsData] = useState<INews[]>([])
     const [filter, setFilter] = useState<string>('')
+    const [errorNews, setErrorNews] = useState<string>('')
     const [showAddNews, setShowAddNews] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
     const [dataSaveNews, setDataSaveNews] = useState<INews>({
@@ -106,8 +107,15 @@ export const NewsPage = (props: any) => {
     }
 
     const handleSaveDataNews = () => {
-        setShowAddNews(prevState => !prevState)
-        setData(dataSaveNews)
+        if (dataSaveNews.description && dataSaveNews.title) {
+            setShowAddNews(prevState => !prevState)
+            setData(dataSaveNews)
+            setErrorNews('')
+        } else {
+            setErrorNews('Не все поля заполнены')
+        }
+
+
     }
 
     const filterGuest = (item: any) => {
@@ -155,6 +163,9 @@ export const NewsPage = (props: any) => {
             }
             <div className="App-add-user-content" style={showAddNews ? {display: "block"} : {display: "none"}}>
                 <div className="row">
+                    <div>
+                        {errorNews}
+                    </div>
                     <form className="col s12">
                         <div className="row">
                             <div className="input-field col s3">
@@ -165,12 +176,16 @@ export const NewsPage = (props: any) => {
                                 <input id="description" type="text" className="validate" onBlur={handleSaveInput}/>
                                 <label htmlFor="description">Описание</label>
                             </div>
+                            <div className="App-action">
+                                <a className="waves-effect waves-light btn" onClick={handleSaveDataNews}>Сохранить новость</a>
+                            </div>
                         </div>
+
+
                     </form>
                 </div>
-                <div className="App-action">
-                    <a className="waves-effect waves-light btn" onClick={handleSaveDataNews}>Сохранить новость</a>
-                </div>
+
+
 
             </div>
             <div className="News-content">

@@ -52,6 +52,22 @@
       "description": "Scott Pilgrim vs. The World: The Game это 2D битэмап вдохновленный культовой серией комиксов и фильмом Scott Pilgrim VS. The World. До этого выходил на Xbox 360 и PlayStation 3.",
       "dateCreator": 1599905085946,
       "approval": true
+    },
+    {
+      "userId": 1,
+      "title": "234",
+      "description": "4",
+      "dateCreator": 1599912699607,
+      "approval": false,
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "title": "12312",
+      "description": "123",
+      "dateCreator": 1599912800450,
+      "approval": false,
+      "id": 6
     }
   ]
 }
