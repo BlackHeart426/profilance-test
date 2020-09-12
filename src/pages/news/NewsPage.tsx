@@ -25,8 +25,7 @@ export const News = {
 
 
 export const NewsPage = (props: any) => {
-    const isAuth = useSelector((state: RootState) => state.app.isAuth)
-    const userId = useSelector((state: RootState) => state.app.userId)
+    const isAuth = useSelector((state: RootState) => state.app.userData.isAuth)
     const [newsData, setNewsData] = useState<INews[]>([])
     const [filter, setFilter] = useState<string>('')
     const [showAddNews, setShowAddNews] = useState<boolean>(false)

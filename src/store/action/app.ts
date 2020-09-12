@@ -2,19 +2,12 @@ import {IReduxBaseAction} from "../reducers/rootReducer";
 import {EReduxActionTypes} from "../types";
 
 export interface IReduxOpenDrawerAction extends IReduxBaseAction{
-    type: EReduxActionTypes.IS_AUTH
+    type: EReduxActionTypes.USER_DATA
 }
 
-export function isAuth(flagAuth: boolean) {
+export function setUserId(data: any) {
     return {
-        type: EReduxActionTypes.IS_AUTH,
-        data: flagAuth
-    }
-}
-
-export function setUserId(flagAuth: number) {
-    return {
-        type: EReduxActionTypes.IS_AUTH,
-        data: flagAuth
+        type: EReduxActionTypes.USER_DATA,
+        data: data
     }
 }

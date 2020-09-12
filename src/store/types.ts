@@ -1,6 +1,5 @@
 export enum EReduxActionTypes {
 
-    IS_AUTH = 'app/isAuth',
-    USER_ID = 'app/userId'
+    USER_DATA = 'app/userData'
 
 }

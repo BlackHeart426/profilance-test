@@ -2,6 +2,9 @@ import React, {Component, useEffect, useState} from "react";
 import {Button, Modal} from "react-materialize";
 import {INews} from "../pages/news/NewsPage";
 import Axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {setUserId} from "../store/action/app";
+import {RootState} from "../store/reducers/rootReducer";
 
 export interface ILogin {
     email: string,
@@ -9,6 +12,8 @@ export interface ILogin {
 }
 
 const Login = (props: any) => {
+    const dispatch = useDispatch()
+    const isAuth = useSelector((state: RootState) => state.app.userData.isAuth)
     const [showModal, setShowModal] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
     const [dataSaveUser, setDataSaveUser] = useState<ILogin>({
@@ -29,6 +34,7 @@ const Login = (props: any) => {
                 console.log('Аторизирован')
                 setError('')
                 setShowModal(true)
+                dispatch(setUserId({...response.data[0], isAuth: true}))
 
             } else {
                 setError('Пароль неверен')
@@ -42,12 +48,10 @@ const Login = (props: any) => {
 
     const handleCheckUser = () => {
         getUser(dataSaveUser)
-        // setShowAddNews(prevState => !prevState)
-        // setData(dataSaveNews)
     }
 
     return (<>
-        {!showModal &&<Modal header="Авторизация" trigger={trigger}>
+        {!isAuth && <Modal header="Авторизация" trigger={trigger}>
             <div className="Login-content">
                 <div className="row">
                     <form className="col s12">

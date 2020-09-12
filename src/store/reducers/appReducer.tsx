@@ -2,7 +2,13 @@ import {EReduxActionTypes} from "../types";
 
 const initialState = {
     isAuth: true,
-    userId: null
+    userData: {
+        id: null,
+        email: null,
+        password: null,
+        isAdmin: false,
+        isAuth: false,
+    }
 }
 
 interface IAction {
@@ -10,20 +16,24 @@ interface IAction {
     data: any
 }
 
-export interface IApp {
+export interface IUser {
+    id: number | null,
+    email: string | null,
+    password: string | null,
+    isAdmin: boolean,
     isAuth: boolean,
-    userId: number | null
+}
+
+export interface IApp {
+
+    userData: IUser
 }
 
 export const appReducer = (state: IApp = initialState, action: IAction) => {
     switch (action.type) {
-        case EReduxActionTypes.IS_AUTH:
+        case EReduxActionTypes.USER_DATA:
             return Object.assign({}, state, {
-                isAuth: action.data
-            })
-        case EReduxActionTypes.USER_ID:
-            return Object.assign({}, state, {
-                userId: action.data
+                userData: Object.assign({}, state.userData, action.data)
             })
         default:
             return state

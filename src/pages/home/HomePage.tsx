@@ -3,11 +3,11 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../store/reducers/rootReducer";
 
 export const HomePage = (props: any) => {
-    const isAuth = useSelector((state: RootState) => state.app.isAuth)
+    const email = useSelector((state: RootState) => state.app.userData.email)
     return (
         <div className="Home-container">
-            "Привет, Гость"
-            {isAuth ? 'true' : 'false'}
+            Привет, {email ? email : 'Гость'}
+
         </div>
     )
 }
