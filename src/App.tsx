@@ -3,6 +3,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import './App.scss';
 import {NavBar} from "./components/NavBar";
 import {useRoutes} from "./router/routes";
+import Modal from "./components/Login";
 
 function App() {
     const routes = useRoutes()
@@ -14,6 +15,7 @@ function App() {
                     <div className="App-content">
                         {routes}
                     </div>
+
                 </Router>
             </div>
         </div>
