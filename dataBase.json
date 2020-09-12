@@ -25,7 +25,7 @@
       "userId": 2,
       "title": "Юэн Макгрегор подтвердил, что сериал про Оби-Вана рассчитан на один сезон",
       "description": "В августе президент Lucasfilm Кэтлин Кеннеди назвала предстоящее шоу про Оби-Вана мини-сериалом, тем самым намекнув, что в нём будет только один сезон. Теперь же Юэн Макгрегор подтвердил это.",
-      "dateCreator": "11.09.2020",
+      "dateCreator": 1599905085946,
       "approval": true,
       "approve": true
     },
@@ -34,7 +34,7 @@
       "userId": 1,
       "title": "Как убивали Mass Effect: Andromeda",
       "description": "Бесконечный пре-продакшн, бардак внутри студии и невыносимый Frostbite.",
-      "dateCreator": "12.09.2020",
+      "dateCreator": 1599905085946,
       "approval": true
     },
     {
@@ -42,7 +42,7 @@
       "userId": 2,
       "title": "Почему с Xbox Series S всё в порядке?",
       "description": "Сегодня было очень много споров вокруг того, что Xbox Series S будет якобы тянуть назад все поколение консолей. Люди ссылаются на треды в Twitter разработчиков, которые, судя по тому что они пишут, не имеют доступа к реальным devkit-ам. Некоторые разработчики сдержанно рассуждали, кто-то яростно бомбил, а кто-то яростно защищал консоль. Давайте тоже порассуждаем.",
-      "dateCreator": "10.09.2020",
+      "dateCreator": 1599905085946,
       "approval": true
     },
     {
@@ -50,24 +50,8 @@
       "userId": 3,
       "title": "Scott Pilgrim vs. The World: The Game Complete Edition",
       "description": "Scott Pilgrim vs. The World: The Game это 2D битэмап вдохновленный культовой серией комиксов и фильмом Scott Pilgrim VS. The World. До этого выходил на Xbox 360 и PlayStation 3.",
-      "dateCreator": "12.09.2020",
-      "approval": true
-    },
-    {
-      "userId": 1,
-      "title": "2",
-      "description": "2",
       "dateCreator": 1599905085946,
-      "approval": false,
-      "id": 5
-    },
-    {
-      "userId": 1,
-      "title": "345345",
-      "description": "345345",
-      "dateCreator": 1599905107522,
-      "approval": false,
-      "id": 6
+      "approval": true
     }
   ]
 }

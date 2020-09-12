@@ -191,6 +191,7 @@ export const NewsPage = (props: any) => {
                     return item.title.toLowerCase().includes(filter.toLowerCase())
                         || item.description.toLowerCase().includes(filter.toLowerCase())
                     })
+                    .sort((a: any, b: any) => (a.dateCreator > b.dateCreator) ? -1 : 1)
                     .map((news: any) =>
                     <NewsCard key={news.id} news={news} userData={userData} onApproveNews={handleApproveNews} onRemoveNews={handleRemoveNews}/>
                 )}

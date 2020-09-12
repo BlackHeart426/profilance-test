@@ -20,8 +20,10 @@ const Login = (props: any) => {
         email: 'test@gmail.com',
         password: '8495fj4',
     })
-    const trigger = <Button>Вход</Button>;
 
+    useEffect(() => {
+        M.updateTextFields();
+    }, [showModal])
     const handleSaveInput = (event: any) => {
         setDataSaveUser({...dataSaveUser, [event.currentTarget.id]: event.currentTarget.value})
     }
@@ -33,7 +35,7 @@ const Login = (props: any) => {
             if (response.data[0].password === dataSaveUser.password) {
                 console.log('Аторизирован')
                 setError('')
-                setShowModal(true)
+                setShowModal(false)
                 dispatch(setUserId({...response.data[0], isAuth: true}))
 
             } else {
@@ -50,8 +52,12 @@ const Login = (props: any) => {
         getUser(dataSaveUser)
     }
 
-    return (<>
-        {!isAuth && <Modal header="Авторизация" trigger={trigger}>
+
+    return (
+        <>
+        {!isAuth &&
+            <><Button onClick={() => setShowModal(prevState => !prevState)}>Вход</Button>
+            <Modal header="Авторизация" open={showModal}>
             <div className="Login-content">
                 <div className="row">
                     <form className="col s12">
@@ -71,11 +77,11 @@ const Login = (props: any) => {
                     {error}
                 </div>
                 <div className="App-action">
-                    <a className="waves-effect waves-light btn" onClick={handleCheckUser}>Логин</a>
+                    <a className="waves-effect waves-light btn" data-target="modal1" onClick={handleCheckUser}>Логин</a>
                 </div>
             </div>
-        </Modal>}
-            </>
+        </Modal></>}
+        </>
     )
 }
 
